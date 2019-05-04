@@ -1,0 +1,1 @@
+<?= \app\modules\contrib\filerepo\FilerepoUploadWidget::widget(); ?>

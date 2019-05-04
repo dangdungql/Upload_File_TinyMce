@@ -1,0 +1,37 @@
+$('a#select-img').click(function(event) {
+    event.preventDefault();
+
+    $('#modal-media-imge').modal('show');       
+    $('#modal-media-imge').on('hide.bs.modal', function(e) {
+        var imgurlsString = $('input#path').val();
+        if(imgurlsString.includes('","'))
+        {
+            var imgurlsArray = JSON.parse(imgurlsString);
+            
+            var divPathGroup = $('#path-group');
+            var inputTemplate = '<input class="form-control" value="{inputVal}" readonly="readonly"/>';
+            var buttonTemplate = '<input class="button-click" value="Select image" id="button-click-{index}" />';
+            divPathGroup.empty();
+            imgurlsArray.forEach(function(imgurl,index) {
+                var newHTML = inputTemplate.replace('{inputVal}', imgurl) + buttonTemplate.replace('{index}', index)
+                divPathGroup.append(newHTML);
+            });
+            divPathGroup.find('.button-click').click(function(event){
+                var ID = $(event.currentTarget).attr('id');
+                //Em check gọi function tùy theo ID của button nhé
+                /*
+                    Code here
+                */
+            });
+        }
+        else
+        {
+
+            var divPathGroup = $('#path-group');
+            var inputTemplate = '<input class="form-control" value="{inputVal}" readonly="readonly"/>';
+            divPathGroup.empty();
+            divPathGroup.append(inputTemplate.replace('{inputVal}', imgurlsString));
+            
+        }
+    });
+});
